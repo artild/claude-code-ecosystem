@@ -13,17 +13,15 @@
   color-scheme: light dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1a1d;
-    --fg: #e0ddd8;
-    --fg-muted: rgba(255,255,255,.3);
-    --border: rgba(255,255,255,.08);
-    --border-subtle: rgba(255,255,255,.04);
-    --code-bg: rgba(255,255,255,.06);
-    --chip-bg: rgba(255,255,255,.04);
-    --tooltip-bg: rgba(30,30,33,0.95);
-  }
+:root[data-theme="dark"] {
+  --bg: #1a1a1d;
+  --fg: #e0ddd8;
+  --fg-muted: rgba(255,255,255,.3);
+  --border: rgba(255,255,255,.08);
+  --border-subtle: rgba(255,255,255,.04);
+  --code-bg: rgba(255,255,255,.06);
+  --chip-bg: rgba(255,255,255,.04);
+  --tooltip-bg: rgba(30,30,33,0.95);
 }
 
 body { margin: 0 }

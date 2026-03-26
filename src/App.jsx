@@ -1,9 +1,24 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { NODES, CAT_META } from "./data";
 import MindMap from "./MindMap";
 import Detail from "./Detail";
 
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  return [theme, () => setTheme(t => t === "dark" ? "light" : "dark")];
+}
+
 export default function App() {
+  const [theme, toggleTheme] = useTheme();
   const [activeId, setActiveId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [showEdges, setShowEdges] = useState(true);
@@ -29,6 +44,9 @@ export default function App() {
           </>}
           <button onClick={() => setShowEdges(p => !p)} style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: `1px solid var(--border)`, borderRadius: 8, cursor: "pointer", fontSize: 11, fontWeight: 600, padding: "5px 12px", opacity: showEdges ? .6 : .3, color: "inherit", transition: "all .2s" }}>
             <svg width="14" height="7" viewBox="0 0 14 7"><path d="M1 6Q7 0 13 6" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" /></svg>{showEdges ? "On" : "Off"}
+          </button>
+          <button onClick={toggleTheme} aria-label="Toggle dark mode" style={{ display: "flex", alignItems: "center", gap: 5, background: "none", border: "1px solid var(--border)", borderRadius: 8, cursor: "pointer", fontSize: 11, fontWeight: 600, padding: "5px 12px", opacity: .6, color: "inherit", transition: "all .2s" }}>
+            {theme === "dark" ? "\u2600" : "\u263E"}
           </button>
         </div>
       </header>

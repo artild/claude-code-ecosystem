@@ -68,10 +68,10 @@ export const EDGES = [
   {from:"sdk",to:"plugins",label:"loads via code"},
   {from:"sdk",to:"subagents",label:"agents param"},
   {from:"models",to:"tools",label:"powers tool loop"},
-  {from:"teams",to:"mcp",label:"inherits MCP"},
-  {from:"claudemd",to:"skills",label:"context loaded"},
-  {from:"claudemd",to:"memory",label:"complements",solid:true},
-  {from:"memory",to:"subagents",label:"context shared"},
+  {from:"claudemd",to:"skills",label:"context inherited"},
+  {from:"claudemd",to:"memory",label:"persists learnings"},
+  {from:"claudemd",to:"subagents",label:"context inherited"},
+  {from:"envs",to:"sdk",label:"embeds engine"},
 ];
 
 export const CAT_META = {

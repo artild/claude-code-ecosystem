@@ -1,8 +1,12 @@
 export const NODES = [
   { id:"claudemd", title:"CLAUDE.md", short:"CLAUDE", cat:"context", color:"#7F77DD",
-    desc:"Persistent project memory loaded every session. Coding standards, architecture, libraries, checklists. Auto-memory saves learnings automatically.",
-    items:[{t:"Project root",loc:"./CLAUDE.md or .claude/CLAUDE.md"},{t:"Global (all projects)",loc:"~/.claude/CLAUDE.md"},{t:"Subdirectory overrides",loc:"src/CLAUDE.md"},{t:"Auto-memory",loc:"~/.claude/MEMORY.md"},{t:"Priority: managed > user > project"},{t:"Bootstrap with /init command"}],
+    desc:"Persistent project instructions loaded every session. Coding standards, architecture, libraries, checklists. The foundation of project context.",
+    items:[{t:"Project root",loc:"./CLAUDE.md or .claude/CLAUDE.md"},{t:"Global (all projects)",loc:"~/.claude/CLAUDE.md"},{t:"Subdirectory overrides",loc:"src/CLAUDE.md"},{t:"Priority: managed > user > project"},{t:"Bootstrap with /init command"}],
     links:[{l:"CLAUDE.md docs",u:"https://code.claude.com/docs/en/claude-md"},{l:"How it works",u:"https://code.claude.com/docs/en/how-claude-code-works"},{l:"Extension overview",u:"https://code.claude.com/docs/en/features-overview"}]},
+  { id:"memory", title:"Memory", short:"Memory", cat:"context", color:"#9B6DD7",
+    desc:"Auto-memory system that saves learnings across sessions. User preferences, feedback, project context, references — builds up over time without manual effort.",
+    items:[{t:"Index file",loc:"~/.claude/MEMORY.md"},{t:"Memory files",loc:"~/.claude/projects/<id>/memory/*.md"},{t:"Types: user, feedback, project, reference"},{t:"YAML frontmatter: name, description, type"},{t:"Auto-saved from conversation context"},{t:"Loaded when relevant to current task"}],
+    links:[{l:"CLAUDE.md docs",u:"https://code.claude.com/docs/en/claude-md"},{l:"How it works",u:"https://code.claude.com/docs/en/how-claude-code-works"}]},
   { id:"skills", title:"Skills", short:"Skills", cat:"extension", color:"#1D9E75",
     desc:"Reusable workflows in SKILL.md + scripts, templates, docs. Claude auto-invokes by description match, or trigger as /slash-commands.",
     items:[{t:"Project",loc:".claude/skills/<n>/SKILL.md"},{t:"Personal",loc:"~/.claude/skills/<n>/SKILL.md"},{t:"YAML frontmatter: name, description, tools, model"},{t:"Bundle scripts in any language alongside"},{t:"Works on Claude Code, Claude.ai, Desktop"},{t:"Context budget: 2% of context window"}],
@@ -66,6 +70,8 @@ export const EDGES = [
   {from:"models",to:"tools",label:"powers tool loop"},
   {from:"teams",to:"mcp",label:"inherits MCP"},
   {from:"claudemd",to:"skills",label:"context loaded"},
+  {from:"claudemd",to:"memory",label:"complements",solid:true},
+  {from:"memory",to:"subagents",label:"context shared"},
 ];
 
 export const CAT_META = {
@@ -74,7 +80,7 @@ export const CAT_META = {
   runtime: { label: "Runtime", color: "#BA7517" },
 };
 
-export const ORDER = ["claudemd","skills","commands","subagents","teams","hooks","mcp","plugins","tools","models","sdk","envs"];
+export const ORDER = ["claudemd","memory","skills","commands","subagents","teams","hooks","mcp","plugins","tools","models","sdk","envs"];
 
 export const CX = 500, CY = 500, R = 350;
 

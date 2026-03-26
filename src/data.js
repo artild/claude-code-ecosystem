@@ -6,7 +6,7 @@ export const NODES = [
   { id:"memory", title:"Memory", short:"Memory", cat:"context", color:"#9B6DD7",
     desc:"Auto-memory system that saves learnings across sessions. User preferences, feedback, project context, references — builds up over time without manual effort.",
     items:[{t:"Index file",loc:"~/.claude/MEMORY.md"},{t:"Memory files",loc:"~/.claude/projects/<id>/memory/*.md"},{t:"Types: user, feedback, project, reference"},{t:"YAML frontmatter: name, description, type"},{t:"Auto-saved from conversation context"},{t:"Loaded when relevant to current task"}],
-    links:[{l:"CLAUDE.md docs",u:"https://code.claude.com/docs/en/claude-md"},{l:"How it works",u:"https://code.claude.com/docs/en/how-claude-code-works"}]},
+    links:[{l:"Memory & CLAUDE.md",u:"https://code.claude.com/docs/en/claude-md"}]},
   { id:"skills", title:"Skills", short:"Skills", cat:"extension", color:"#1D9E75",
     desc:"Reusable workflows in SKILL.md + scripts, templates, docs. Claude auto-invokes by description match, or trigger as /slash-commands.",
     items:[{t:"Project",loc:".claude/skills/<n>/SKILL.md"},{t:"Personal",loc:"~/.claude/skills/<n>/SKILL.md"},{t:"YAML frontmatter: name, description, tools, model"},{t:"Bundle scripts in any language alongside"},{t:"Works on Claude Code, Claude.ai, Desktop"},{t:"Context budget: 2% of context window"}],
@@ -94,6 +94,6 @@ export function crv(fid, tid) {
   const p1 = POS[fid], p2 = POS[tid], mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
   const dx = mx - CX, dy = my - CY, dist = Math.sqrt(dx * dx + dy * dy) || 1;
   const ad = Math.abs(p1.a - p2.a), norm = Math.min(ad, Math.PI * 2 - ad) / Math.PI;
-  const bulge = 35 + norm * 55, cpx = mx + (dx / dist) * bulge, cpy = my + (dy / dist) * bulge;
+  const bulge = Math.max(60, 35 + norm * 70), cpx = mx + (dx / dist) * bulge, cpy = my + (dy / dist) * bulge;
   return { d: `M${p1.x},${p1.y} Q${cpx},${cpy} ${p2.x},${p2.y}`, cpx, cpy };
 }

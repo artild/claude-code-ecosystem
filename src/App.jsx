@@ -17,13 +17,31 @@ function useTheme() {
   return [theme, () => setTheme(t => t === "dark" ? "light" : "dark")];
 }
 
+function useHashNode() {
+  const read = () => {
+    const h = location.hash.slice(1);
+    return NODES.find(n => n.id === h) ? h : null;
+  };
+  const [id, setId] = useState(read);
+  useEffect(() => {
+    const onHash = () => setId(read());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  const select = useCallback(newId => {
+    const next = id === newId ? null : newId;
+    history.replaceState(null, "", next ? `#${next}` : location.pathname + location.search);
+    setId(next);
+  }, [id]);
+  return [id, select];
+}
+
 export default function App() {
   const [theme, toggleTheme] = useTheme();
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, selectNode] = useHashNode();
   const [hoveredId, setHoveredId] = useState(null);
   const [showEdges, setShowEdges] = useState(true);
   const activeNode = NODES.find(n => n.id === activeId) || null;
-  const handleSelect = useCallback(id => setActiveId(p => p === id ? null : id), []);
 
   return (
     <div style={{ fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif", minHeight: "100vh", background: "var(--bg)", color: "var(--fg)" }}>
@@ -53,15 +71,21 @@ export default function App() {
 
       <div className="cc-layout" style={{ maxWidth: 1400, margin: "0 auto", padding: "0 24px 40px", display: "flex", gap: 0, alignItems: "stretch", minHeight: "80vh" }}>
         <div style={{ flex: "1 1 58%", minWidth: 0, padding: "8px 0" }}>
-          <MindMap activeId={activeId} hoveredId={hoveredId} showEdges={showEdges} onSelect={handleSelect} onHover={setHoveredId} />
+          <MindMap activeId={activeId} hoveredId={hoveredId} showEdges={showEdges} onSelect={selectNode} onHover={setHoveredId} />
         </div>
         <div className="cc-detail" style={{ flex: "1 1 38%", maxWidth: 480, borderLeft: "1px solid var(--border)", paddingLeft: 28, overflowY: "auto", minHeight: 400 }}>
-          <Detail node={activeNode} onClose={() => setActiveId(null)} />
+          <Detail node={activeNode} onClose={() => selectNode(activeId)} onNavigate={selectNode} />
         </div>
       </div>
 
       <footer style={{ textAlign: "center", padding: "16px", fontSize: 10, opacity: .2, borderTop: "1px solid var(--border-subtle)" }}>
-        Links: code.claude.com · platform.claude.com · modelcontextprotocol.io · docs.ollama.com
+        <a href="https://code.claude.com" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>code.claude.com</a>
+        {" · "}
+        <a href="https://platform.claude.com" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>platform.claude.com</a>
+        {" · "}
+        <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>modelcontextprotocol.io</a>
+        {" · "}
+        <a href="https://docs.ollama.com" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "none" }}>docs.ollama.com</a>
       </footer>
     </div>
   );

@@ -1,6 +1,6 @@
 import { NODES, EDGES, CAT_META } from "./data";
 
-export default function Detail({ node, onClose }) {
+export default function Detail({ node, onClose, onNavigate }) {
   if (!node) return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", textAlign: "center", padding: "40px 24px", opacity: .2 }}>
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1" opacity=".5" style={{ marginBottom: 16 }}>
@@ -37,7 +37,7 @@ export default function Detail({ node, onClose }) {
             <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2, opacity: .3, marginBottom: 8 }}>Contains</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>{containsRels.map((e, j) => {
               const other = NODES.find(n => n.id === (e.from === node.id ? e.to : e.from));
-              return (<span key={j} style={{ fontSize: 12, padding: "5px 12px", borderRadius: 8, background: other?.color + "12", border: `1.5px solid ${other?.color}22`, color: other?.color, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 5 }}>
+              return (<span key={j} onClick={() => onNavigate(other?.id)} style={{ fontSize: 12, padding: "5px 12px", borderRadius: 8, background: other?.color + "12", border: `1.5px solid ${other?.color}22`, color: other?.color, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 5, cursor: "pointer", transition: "all .15s" }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: other?.color, opacity: .6 }} />{other?.title}
               </span>);
             })}</div>
@@ -47,7 +47,7 @@ export default function Detail({ node, onClose }) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>{otherRels.map((e, j) => {
               const other = NODES.find(n => n.id === (e.from === node.id ? e.to : e.from));
               const dir = e.from === node.id ? "\u2192" : "\u2190";
-              return (<span key={j} style={{ fontSize: 12, padding: "5px 12px", borderRadius: 8, background: "var(--chip-bg)", border: "1px solid var(--border)", display: "inline-flex", alignItems: "center", gap: 5 }}>
+              return (<span key={j} onClick={() => onNavigate(other?.id)} style={{ fontSize: 12, padding: "5px 12px", borderRadius: 8, background: "var(--chip-bg)", border: "1px solid var(--border)", display: "inline-flex", alignItems: "center", gap: 5, cursor: "pointer", transition: "all .15s" }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: other?.color, opacity: .5 }} />
                 <span style={{ opacity: .4, fontSize: 10 }}>{dir}</span>{other?.title}
                 <span style={{ opacity: .3, fontSize: 10 }}>{e.label}</span>

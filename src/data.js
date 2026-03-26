@@ -7,6 +7,10 @@ export const NODES = [
     desc:"Auto-memory system that saves learnings across sessions. User preferences, feedback, project context, references — builds up over time without manual effort.",
     items:[{t:"Index file",loc:"~/.claude/MEMORY.md"},{t:"Memory files",loc:"~/.claude/projects/<id>/memory/*.md"},{t:"Types: user, feedback, project, reference"},{t:"YAML frontmatter: name, description, type"},{t:"Auto-saved from conversation context"},{t:"Loaded when relevant to current task"}],
     links:[{l:"Memory & CLAUDE.md",u:"https://code.claude.com/docs/en/claude-md"}]},
+  { id:"sessions", title:"Sessions", short:"Sessions", cat:"context", color:"#6B5FC7",
+    desc:"Persistent conversation threads that survive restarts. Resume previous work, branch into new directions, or continue where you left off.",
+    items:[{t:"Resume last session",loc:"claude --continue"},{t:"Resume specific session",loc:"claude --resume <id>"},{t:"List sessions",loc:"claude sessions list"},{t:"Session storage",loc:"~/.claude/projects/<id>/sessions/"},{t:"Each session has full message history"},{t:"Compact: /compact to shrink context"}],
+    links:[{l:"Sessions docs",u:"https://code.claude.com/docs/en/sessions"},{l:"CLI reference",u:"https://code.claude.com/docs/en/cli-reference"}]},
   { id:"skills", title:"Skills", short:"Skills", cat:"extension", color:"#1D9E75",
     desc:"Reusable workflows in SKILL.md + scripts, templates, docs. Claude auto-invokes by description match, or trigger as /slash-commands.",
     items:[{t:"Project",loc:".claude/skills/<n>/SKILL.md"},{t:"Personal",loc:"~/.claude/skills/<n>/SKILL.md"},{t:"YAML frontmatter: name, description, tools, model"},{t:"Bundle scripts in any language alongside"},{t:"Works on Claude Code, Claude.ai, Desktop"},{t:"Context budget: 2% of context window"}],
@@ -70,6 +74,8 @@ export const EDGES = [
   {from:"models",to:"tools",label:"powers tool loop"},
   {from:"claudemd",to:"skills",label:"context inherited"},
   {from:"claudemd",to:"memory",label:"persists learnings"},
+  {from:"sessions",to:"memory",label:"triggers saves"},
+  {from:"sessions",to:"subagents",label:"spawns within"},
   {from:"claudemd",to:"subagents",label:"context inherited"},
   {from:"envs",to:"sdk",label:"embeds engine"},
 ];
@@ -80,7 +86,7 @@ export const CAT_META = {
   runtime: { label: "Runtime", color: "#BA7517" },
 };
 
-export const ORDER = ["claudemd","memory","skills","commands","subagents","teams","hooks","mcp","plugins","tools","models","sdk","envs"];
+export const ORDER = ["claudemd","memory","sessions","skills","commands","subagents","teams","hooks","mcp","plugins","tools","models","sdk","envs"];
 
 export const CX = 500, CY = 500, R = 350;
 

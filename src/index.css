@@ -1,3 +1,44 @@
-body {
-  margin: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+::selection{background:#D4537E30}
+
+:root {
+  --bg: #faf9f7;
+  --fg: #2a2a28;
+  --fg-muted: rgba(0,0,0,.3);
+  --border: rgba(0,0,0,.06);
+  --border-subtle: rgba(0,0,0,.04);
+  --code-bg: rgba(0,0,0,.03);
+  --chip-bg: rgba(0,0,0,.025);
+  --tooltip-bg: rgba(255,255,255,0.95);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1d;
+    --fg: #e0ddd8;
+    --fg-muted: rgba(255,255,255,.3);
+    --border: rgba(255,255,255,.08);
+    --border-subtle: rgba(255,255,255,.04);
+    --code-bg: rgba(255,255,255,.06);
+    --chip-bg: rgba(255,255,255,.04);
+    --tooltip-bg: rgba(30,30,33,0.95);
+  }
+}
+
+body { margin: 0 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) }
+  to { opacity: 1; transform: none }
+}
+
+@media (max-width: 900px) {
+  .cc-layout { flex-direction: column !important }
+  .cc-detail {
+    max-width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
+    padding-left: 0 !important;
+  }
 }

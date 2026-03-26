@@ -144,6 +144,8 @@ T2_ORDER.forEach((id, i) => {
   POS[id] = { x: CX + R2 * Math.cos(a), y: CY + R2 * Math.sin(a), a, tier: 2 };
 });
 
+export const NODE_MAP = new Map(NODES.map(n => [n.id, n]));
+
 // Size mapping: size 3=42, 2=34, 1=26
 export const SZ = { 3: 42, 2: 34, 1: 26 };
 export const SZ_HOVER = { 3: 46, 2: 38, 1: 30 };

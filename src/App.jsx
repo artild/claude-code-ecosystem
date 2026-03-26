@@ -48,9 +48,9 @@ export default function App() {
       <header style={{ padding: "20px 24px 0", maxWidth: 1400, margin: "0 auto", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
         <div>
           <h1 style={{ fontSize: 22, fontWeight: 700, letterSpacing: -.8 }}>Claude Code <span style={{ fontWeight: 400, opacity: .3 }}>/</span><span style={{ fontWeight: 400, opacity: .4 }}> ecosystem</span></h1>
-          <p style={{ fontSize: 12, opacity: .3, marginTop: 3 }}>Click nodes · hover edges · follow doc links</p>
+          <p style={{ fontSize: 12, opacity: .45, marginTop: 3 }}>Click nodes · hover edges · follow doc links</p>
         </div>
-        <div style={{ display: "flex", gap: 16, alignItems: "center", fontSize: 11, fontWeight: 500, opacity: .4 }}>
+        <div style={{ display: "flex", gap: 16, alignItems: "center", fontSize: 11, fontWeight: 500, opacity: .55 }}>
           {Object.values(CAT_META).map(c => (
             <span key={c.label} style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: c.color }} />{c.label}

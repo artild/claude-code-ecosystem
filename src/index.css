@@ -3,25 +3,25 @@
 
 :root {
   --bg: #faf9f7;
-  --fg: #2a2a28;
-  --fg-muted: rgba(0,0,0,.3);
-  --border: rgba(0,0,0,.06);
-  --border-subtle: rgba(0,0,0,.04);
-  --code-bg: rgba(0,0,0,.03);
-  --chip-bg: rgba(0,0,0,.025);
-  --tooltip-bg: rgba(255,255,255,0.95);
+  --fg: #1a1a18;
+  --fg-muted: rgba(0,0,0,.45);
+  --border: rgba(0,0,0,.12);
+  --border-subtle: rgba(0,0,0,.08);
+  --code-bg: rgba(0,0,0,.06);
+  --chip-bg: rgba(0,0,0,.05);
+  --tooltip-bg: rgba(255,255,255,0.97);
   color-scheme: light dark;
 }
 
 :root[data-theme="dark"] {
-  --bg: #1a1a1d;
-  --fg: #e0ddd8;
-  --fg-muted: rgba(255,255,255,.3);
-  --border: rgba(255,255,255,.08);
-  --border-subtle: rgba(255,255,255,.04);
-  --code-bg: rgba(255,255,255,.06);
-  --chip-bg: rgba(255,255,255,.04);
-  --tooltip-bg: rgba(30,30,33,0.95);
+  --bg: #131315;
+  --fg: #eeece8;
+  --fg-muted: rgba(255,255,255,.45);
+  --border: rgba(255,255,255,.14);
+  --border-subtle: rgba(255,255,255,.08);
+  --code-bg: rgba(255,255,255,.1);
+  --chip-bg: rgba(255,255,255,.07);
+  --tooltip-bg: rgba(25,25,28,0.97);
 }
 
 body { margin: 0 }

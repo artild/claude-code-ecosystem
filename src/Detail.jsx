@@ -22,7 +22,7 @@ export default function Detail({ node, onClose, onNavigate }) {
         <span style={{ fontSize: 10, padding: "3px 10px", borderRadius: 14, background: node.color + "15", color: node.color, fontWeight: 600 }}>{CAT_META[node.cat]?.label}</span>
         <button onClick={onClose} aria-label="Close detail panel" style={{ background: "none", border: "none", fontSize: 18, cursor: "pointer", opacity: .25, lineHeight: 1, color: "inherit" }}>{"\u00d7"}</button>
       </div>
-      <p style={{ fontSize: 14, lineHeight: 1.7, opacity: .55, marginBottom: 20 }}>{node.desc}</p>
+      <p style={{ fontSize: 14, lineHeight: 1.7, opacity: .7, marginBottom: 20 }}>{node.desc}</p>
       {node.items.map((it, i) => (
         <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", padding: "7px 0", borderTop: i > 0 ? "1px solid var(--border-subtle)" : "none" }}>
           <span style={{ width: 5, height: 5, borderRadius: "50%", background: node.color, opacity: .3, flexShrink: 0, marginTop: 8 }} />

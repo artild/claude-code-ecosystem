@@ -23,7 +23,7 @@ export default function MindMap({ activeId, hoveredId, showEdges, onSelect, onHo
         return (<g key={`e-${i}`}>
           <path d={d} fill="none" stroke="transparent" strokeWidth="20" style={{ cursor: "pointer" }} onMouseEnter={() => setHovEdge(i)} onMouseLeave={() => setHovEdge(null)} />
           <path d={d} fill="none" stroke={col} strokeWidth={hot ? (e.solid ? 3 : 2) : (e.solid ? 1.8 : .7)} opacity={hot ? .6 : (e.solid ? .22 : .07)} strokeDasharray={e.solid ? "none" : (hot ? "7 4" : "3 5")} style={{ transition: "all .3s", pointerEvents: "none" }} />
-          {hot && <g style={{ pointerEvents: "none" }}><rect x={cpx - 80} y={cpy - 15} width={160} height={30} rx={8} fill="var(--tooltip-bg)" stroke={col} strokeWidth={e.solid ? 1.2 : .6} /><text x={cpx} y={cpy + 1} textAnchor="middle" dominantBaseline="central" fontSize="12" fontWeight="600" fill={col}>{e.label}</text></g>}
+          {hovEdge === i && <g style={{ pointerEvents: "none" }}><rect x={cpx - 80} y={cpy - 15} width={160} height={30} rx={8} fill="var(--tooltip-bg)" stroke={col} strokeWidth={e.solid ? 1.2 : .6} /><text x={cpx} y={cpy + 1} textAnchor="middle" dominantBaseline="central" fontSize="12" fontWeight="600" fill={col}>{e.label}</text></g>}
         </g>);
       })}
       {/* Center hub */}

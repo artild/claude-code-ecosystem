@@ -125,21 +125,23 @@ export const CAT_META = {
   runtime: { label: "Runtime", color: "#BA7517" },
 };
 
-// Layout: tier 1 = inner ring, tier 2 = outer ring
-const T1 = NODES.filter(n => n.tier === 1);
-const T2 = NODES.filter(n => n.tier === 2);
+// Layout: explicit ordering so outer nodes sit near related inner nodes
+// Inner ring (clockwise from top): claudemd, skills, subagents, mcp, hooks, plugins, tools, sdk
+const T1_ORDER = ["claudemd","skills","subagents","mcp","hooks","plugins","tools","sdk"];
+// Outer ring: each positioned near its primary inner-ring parent
+const T2_ORDER = ["memory","sessions","commands","teams","worktrees","models","plans","settings","permissions","envs","tasks","context"];
 
 export const CX = 500, CY = 500;
 export const R1 = 240, R2 = 420;
 
 export const POS = {};
-T1.forEach((n, i) => {
-  const a = (i / T1.length) * Math.PI * 2 - Math.PI / 2;
-  POS[n.id] = { x: CX + R1 * Math.cos(a), y: CY + R1 * Math.sin(a), a, tier: 1 };
+T1_ORDER.forEach((id, i) => {
+  const a = (i / T1_ORDER.length) * Math.PI * 2 - Math.PI / 2;
+  POS[id] = { x: CX + R1 * Math.cos(a), y: CY + R1 * Math.sin(a), a, tier: 1 };
 });
-T2.forEach((n, i) => {
-  const a = (i / T2.length) * Math.PI * 2 - Math.PI / 2;
-  POS[n.id] = { x: CX + R2 * Math.cos(a), y: CY + R2 * Math.sin(a), a, tier: 2 };
+T2_ORDER.forEach((id, i) => {
+  const a = (i / T2_ORDER.length) * Math.PI * 2 - Math.PI / 2;
+  POS[id] = { x: CX + R2 * Math.cos(a), y: CY + R2 * Math.sin(a), a, tier: 2 };
 });
 
 // Size mapping: size 3=42, 2=34, 1=26

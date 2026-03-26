@@ -10,7 +10,7 @@ export default function MindMap({ activeId, hoveredId, showEdges, onSelect, onHo
   }, [activeId, hoveredId]);
 
   return (
-    <svg viewBox="-80 -40 1160 1080" role="img" aria-label="Claude Code ecosystem mind map" style={{ width: "100%", display: "block" }}>
+    <svg viewBox="-160 -40 1320 1080" role="img" aria-label="Claude Code ecosystem mind map" style={{ width: "100%", display: "block" }}>
       <circle cx={CX} cy={CY} r={R} fill="none" stroke="var(--fg)" strokeWidth="0.5" opacity="0.07" />
       {NODES.map(n => { const p = POS[n.id], on = activeId === n.id, hv = hoveredId === n.id;
         return <line key={`s-${n.id}`} x1={CX} y1={CY} x2={p.x} y2={p.y} stroke={n.color} strokeWidth={on ? 1 : .4} opacity={on ? .2 : hv ? .1 : .03} style={{ transition: "all .3s" }} />;

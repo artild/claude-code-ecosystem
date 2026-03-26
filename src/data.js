@@ -76,7 +76,7 @@ export const CAT_META = {
 
 export const ORDER = ["claudemd","skills","commands","subagents","teams","hooks","mcp","plugins","tools","models","sdk","envs"];
 
-export const CX = 400, CY = 400, R = 280;
+export const CX = 500, CY = 500, R = 350;
 
 export const POS = {};
 ORDER.forEach((id, i) => {
